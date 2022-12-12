@@ -1,0 +1,75 @@
+     
+	 <div class="page-header text-center mt-100" style="  background-image: url('img/bg/21.jpg')">
+        	
+				<div class="container">
+        			<h3 class="page-title"> {{userData.Name}}</h1>
+        		</div><!-- End .container -->
+				<div class="container">
+        			<h3 class="page-title"> {{userData.Email}}</h1>
+        		</div><!-- End .container -->
+				<div class="container">
+        			<h3 class="page-title">{{userData.Mobile}}</h1>
+        		</div><!-- End .container -->
+        	</div><!-- End .page-header -->
+
+
+	   
+	   <div class="single-slider d-flex align-items-center h-950" data-background="img/bg/15.jpg">
+	        <div class="page-content">
+            	<div class="checkout">
+            	<div class="container">
+            		
+						
+            			
+
+							<div class="tab-content ml-5">
+							    <div class="container mt-200 ">
+									<h2 class="ml-5 text-center">PROFILE</h2>
+									{{!-- <div class="form-field col-lg-6"> --}}
+										<h4 style="color: rgb(94, 255, 0);">{{Message}}</h4>
+							    <div class="" id="register-2" role="tabpanel" aria-labelledby="register-tab-2">
+							    	<form action="/edit-profile" method="post">
+							    		<div class="form-group  ">
+							    			<label for="register-password-2">Full Name *</label>
+							    			<input type="text" class="form-control" id="Name" name="Name" value="{{userData.Name}}" required>
+							    		</div><!-- End .form-group -->
+
+							    		<div class="form-group ">
+							    			<label for="email">Email id *</label>
+							    			<input type="email" class="form-control" id="Email" name="Email" value="{{userData.Email}}" required>
+							    		</div><!-- End .form-group -->
+										<div class="form-group  ">
+							    			<label for="number">Mobile number *</label>
+							    			<input type="tel" class="form-control" id="Mobile" name="Mobile" value="{{userData.Mobile}}" required>
+							    		</div><!-- End .form-group -->
+
+										<div class="form-group  ">
+							    			<label for="number">Address *</label>
+							    			<input type="tel" class="form-control"  id="Adress"  name="Adress" value="{{userData.Adress}}" required>
+							    		</div><!-- End .form-group -->
+
+
+							    		<div class="form-footer  text-center">
+							    			<button type="submit"  class="btnn btn-lg btn-primary text-center">
+			                					<span>Submit</span>
+			            						<i class="icon-long-arrow-right"></i>
+			                				</button>
+
+
+							    		</div><!-- End .form-footer -->
+							    	</form>
+
+							    </div><!-- .End .tab-pane -->
+								{{!-- </div> --}}
+							</div><!-- End .tab-content -->
+						</div>
+            		
+            	</div><!-- End .container -->
+                </div><!-- End .checkout -->
+            </div><!-- End .page-content -->
+</div>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+ 
+
+{{!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}

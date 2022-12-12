@@ -1,0 +1,47 @@
+ <div class="tab-content mt-100">
+                <div class="tab-pane fade show active" id="main-tab-1">
+                    <div class="main-product-carousel owl-carousel red-nav">
+                            {{#each products}}
+                            <div class="col-12">
+                                <div class="product-box mb-40">
+                                    <div class="product-box-wrapper">
+                                        <div class="product-img">
+                                           
+                                            <a href="/single-product?singlepid={{this._id}}" class="d-block">
+     <img src="/product-images/{{this._id}}.jpg" class="w-100" alt="">
+                                            </a>
+                                            <a href="/single-product"
+                                                class="product-img-link quick-view-1 text-capitalize">Quick view</a>
+                                        </div>
+
+                                        <div class="product-desc pb-20">
+                                            <div class="product-desc-top">
+                                                <div class="categories">
+                                                    <a href="/single-product" class="product-category"><span>{{this.Category}}</span></a>
+                                                </div>
+                                                <a href="wishlist.html" class="wishlist float-right"><span><i
+                                                            class="fal fa-heart"></i></span></a>
+                                            </div>
+                                            <a href="/single-product" class="product-description"><span>{{this.Name}}</span></a>
+                                            <a href="/single-product" class="product-title">{{this.Description}}</a>
+                                           
+                                                    
+                                               
+                                            <div class="price-switcher">
+                                                <span class="price switcher-item">Rs:{{this.Price}}</span>
+                                                {{!-- <a href="/add-to-cart/{{this._id}}" class="add-cart text-capitalize switcher-item">+add
+                                                    to cart</a> --}}
+                                                    <a onclick="addToCart('{{this._id}}')" class="add-cart text-capitalize switcher-item">+add to cart</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          {{/each}}
+                    </div>
+                    <div class="text-center mt-60">
+                        <a href="/shop" class="load-more">LOAD MORE...</a>
+                    </div>
+                </div>
+                <!-- /. tab content 3 -->
+            </div>
