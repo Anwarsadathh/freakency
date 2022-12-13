@@ -37,8 +37,6 @@ Hbs.handlebars.registerHelper('if_eq', function(a, b, opts) {
       return opts.inverse(this);
 });
 
-
-
 Hbs.handlebars.registerHelper("inc", function(value, options)
 {
     return parseInt(value) + 1;

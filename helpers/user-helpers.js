@@ -5,7 +5,7 @@ const { response, use, options } = require('../app')
 var ObjectId=require('mongodb').ObjectId
 const Razorpay = require('razorpay');
 const { uid } = require('uid')
-const Otp=require('../config/OTP');
+require ('dotenv').config()
 const Client=require('twilio')(process.env.accoundSid,process.env.authToken)
 var moment = require('moment');
 var paypal = require('paypal-rest-sdk');
