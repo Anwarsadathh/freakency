@@ -28,14 +28,7 @@ module.exports={
         })
       
     },
-    // getuserdata:()=>{
-    //     return new Promise (async(resolve,reject)=>{
-    //         let usdata = await db.get().collection(collection.USER_COLLECTION).find().toArray()
-    //         // console.log(usdata);
-    //         resolve(usdata)
-    //     })
-    // },
-
+   
     doLogin:(userData)=>{
         return new Promise(async(resolve,reject)=>{
             let loginStatus=false
@@ -148,32 +141,6 @@ module.exports={
             resolve(count)
         })
     },
-    // changeProductQuantity:(details)=>{
-    //     details.count=parseInt(details.count)
-    //     details.quantity=parseInt(details.quantity)
-    //     console.log(details,"detail aaannn");
-      
-    //     return new Promise((resolve,reject)=>{
-    //         if(details.count==-1 && details.quantity==1){
-    //             db.get().collection(collection.CART_COLLECTION)
-    //             .updateOne({_id:ObjectId(details.cart)},
-    //             {
-    //                 $pull:{products:{item:ObjectId(details.product)}}
-    //             }).then((response)=>{
-    //                 resolve({removeProduct:true})
-    //             })
-    //         }else{
-    //         db.get().collection(collection.CART_COLLECTION)
-    //          .updateOne({_id:ObjectId(details.cart), 'products.item':ObjectId(details.product)},
-    //                 {
-    //                      $inc:{'products.$.quantity':details.count}
-    //                 }
-    //                 ).then((response)=>{
-    //                     resolve({status:true})
-    //                 })
-    //             }
-    //     })
-    // },
     changeProductQuantity:({cart,product,count,quantity})=>{
         let response={}
         
@@ -267,7 +234,7 @@ module.exports={
                 }
                 
             ]).toArray()
-          //console.log(total[0]?.total,"hellod total");
+     
             resolve(total[0]?.total)
         })
     },
@@ -376,7 +343,7 @@ module.exports={
                 {
                     $project: {
 
-                        //    total:{$sum:{$multiply:['$quantity','$product.price']}}
+                      
                         total: { $multiply: [{ $toInt: '$quantity' }, { $toInt: '$product.price' }] }
 
                     }
@@ -392,40 +359,6 @@ module.exports={
 
         })
     },
-
-
-
-    // placeOrder:(order,products,total,userid)=>{
-    //     console.log(order,'.orderrrrrrrrrrrrrrrrrrrrrrrrrr');
-    //     //console.log(order.user,'orderb userrr');
-    //     console.log(userid,'hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
-    //     return new Promise((resolve,reject)=>{
-    //        console.log(order,products,total);
-    //        let status=order['payment-method']==='COD'?'placed':'pending'
-    //        let orderObj={
-    //         deliveryDetails:{
-    //             Name: order.Name,
-    //             Phone: order.Phone,
-    //             Email: order.Email,
-    //             City: order.Town,
-    //             state: order.state,
-    //             Adress: order.adress,
-    //             pincode: order.Pincode
-    //         },
-    //         userId:ObjectId(userid),
-    //         paymentMethod:order['payment-method'],
-    //         products:products,
-    //         totalAmount:total,
-    //         status:status,
-    //         date:new Date()
-    //        }
-    //        db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response)=>{
-    //         db.get().collection(collection.CART_COLLECTION).deleteOne({user:ObjectId(order.userId)})
-    //         resolve(response.insertedId)
-    //        })
-    //     })
-
-    // },
     placeOrder: (order, product, total, userId) => {
         return new Promise(async (resolve, reject) => {
             let adressid = order.selectedAdress
@@ -564,7 +497,7 @@ module.exports={
             {
                 $addFields:{
                      convertPrice: { $toInt:'$product.ProductPrice'},
-                    // convertPrice: { $toInt:'$product.ProductPrice'},
+                   
                 }
              },
              {
@@ -642,15 +575,7 @@ stockIncrement:({proId,quantity})=>{
  },
 
 
-//   deleteOrder:(orderId)=>{
-//     return new Promise((resolve,reject)=>{
-//       console.log(orderId);
-//      console.log(ObjectId(orderId));
-//       db.get().collection(collection.ORDER_COLLECTION).deleteOne({_id:ObjectId(orderId)}).then((response)=>{
-//         resolve(response)
-//       })
-//     })
-//   },
+
   cancelOrder: (orderId,user) => {
 
     let response ={}
@@ -756,21 +681,11 @@ setWalletHistory:(user,order,description,debit)=>{
   getSingleProduct:(id)=>{
     return new Promise(async(resolve,reject)=>{
         let singleProduct=await db.get().collection(collection.PRODUCT_COLLECTION).findOne({_id:ObjectId(id)})
-        //console.log(singleProduct,"//////////////////////////adffadf");
+  
         resolve(singleProduct)
     })
   },
 
-    // addAddress:(details,userId)=>{
-    //     return new Promise(async(resolve,reject)=>{
-    //         let user=await db.get().collection(collection.ADDRESS_COLLECTION).findOne({user:ObjectId(userId)})
-    //         db.get().collection(collection.ADDRESS_COLLECTION).insertOne(details).then((datas)=>{
-    //             resolve(datas,user)
-    //         })     
-         
-    //     })
-      
-    // },
     generateRazorpay:(orderId,total)=>{
 
         console.log("userHelper il generateRazorpay de ullil");
@@ -866,7 +781,6 @@ setWalletHistory:(user,order,description,debit)=>{
                
         
             ]).toArray()
-            console.log((addressDetails,'sssssssssssssssssssssssssssssssss'));
             resolve(addressDetails)
         })
       },
@@ -997,9 +911,9 @@ setWalletHistory:(user,order,description,debit)=>{
             })
         })
     },
-    /* -------------------------------------------------------------------------- */
+ 
 /*                             SET WALLET HISTORY                             */
-/* -------------------------------------------------------------------------- */
+
 
 
 setWalletHistory:(user,order,description,debit)=>{
@@ -1061,9 +975,9 @@ setWalletHistory:(user,order,description,debit)=>{
 
 
 
-    /* -------------------------------------------------------------------------- */
+   
     /*                         Wallet history for viewing                         */
-    /* -------------------------------------------------------------------------- */
+   
 
 
     disWalletHistory:(user)=>{
@@ -1103,14 +1017,13 @@ setWalletHistory:(user,order,description,debit)=>{
                             $set: { wallet: amount }
                         })
                 })
-            // console.log('hhhhhhhhhhhhhh');
+           
             resolve({ status: true })
         })
     },
-   
-     /* -------------------------------------------------------------------------- */
+
   /*                              Verifying Coupon                              */
-  /* -------------------------------------------------------------------------- */
+ 
 
   couponVerify: (user) => {
     console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');

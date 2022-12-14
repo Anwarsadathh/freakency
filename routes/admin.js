@@ -13,7 +13,7 @@ const prepass="1234"
 
 router.get('/', function(req, res, next) {
 
-  // res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+  
   let User=req.session.admin;
   if(User){
     res.redirect('/admin/admin-index')
@@ -63,8 +63,7 @@ router.get('/admin-index', async(req, res, next)=> {
  console.log(sum,"mmmmmmmmmmmmmmmmm");
   let sumFinal= Math.round(sum)
   console.log(sumFinal,"heydsssssssssss");
-  // res.render('admin/Admin-dashboard',{data,year,dailysales,sumFinal,dailyorders,
-  //     TotalUsers,TotalInactiveUsers,status,payment,month,daily})
+  
     res.render('admin/admin-index',{layout:'admin-layout',admin:true,year,data,month,daily,sumFinal,status,payment,TotalUsers,TotalInactiveUsers,dailyorders,dailysales});
   })
   
@@ -250,11 +249,7 @@ router.get('/delete-category/:id',(req,res)=>{
   })
 })
 
-// router.get('/orders',async(req,res)=>{
-//   let orders=await adminHelpers.getUserOrders()
-//   console.log(orders,'/./././/./???>/./.');
-//   res.render('admin/orders',{layout:'admin-layout',admin:true,orders})
-// })
+
 
 router.get('/delete-orders/:id',(req,res)=>{
   let orderId=req.params.id
@@ -264,13 +259,6 @@ router.get('/delete-orders/:id',(req,res)=>{
   })
 })
 
-// router.get('/delete-order',(req,res)=>{
-//   let orderId=req.query.id
-//   console.log(orderId);
-//   userHelpers.deleteOrder(orderId).then((response)=>{
-//    res.redirect('/orders')
-//   })
-// })
 
 
 router.get('/orders',async(req,res)=>{
@@ -291,27 +279,10 @@ router.post('/order-canceladmins',(req,res)=>{
        res.json({status:false})
     }
  })
-//   adminHelpers.cancelOrder(req.params.id).then((response)=>{
 
-//     res.json(response)
-// })
 })
 
-// router.get('/order-shipped/:id',(req,res)=>{
-//   console.log("1234");
-//   adminHelpers.shippedOrder(req.params.id).then((response)=>{
 
-//     res.json(response)
-// })
-// })
-
-// router.get('/order-delivered/:id',(req,res)=>{
-//   console.log("es");
-//   adminHelpers. deliveredOrder(req.params.id).then((response)=>{
-
-//     res.json(response)
-// })
-// })
 
 router.get('/sales',(req,res)=>{
   res.render('admin/sales',{layout:'admin-layout',admin:true})
@@ -324,7 +295,7 @@ router.post('/sales',async(req,res)=>{
   console.log(req.body,'e4rf');   
 let dailysalePro = await adminHelpers.getDailySalespro(day,dayend)    
 console.log(dailysalePro,"dailysalePro");
-//let dailyReport = await adminHelpers.getDailyReport()
+
 let sum=0;
 for(var i=0;i<dailysalePro.length;i++){
     sum=sum+dailysalePro[i].quantity
@@ -355,7 +326,7 @@ router.post('/dailysales',async(req,res)=>{
   console.log(req.body,'e4rf');   
 let dailysalePro = await adminHelpers.getDailySalespro(day,dayend)    
 console.log(dailysalePro,"dailysalePro");
-//let dailyReport = await adminHelpers.getDailyReport()
+
 let sum=0;
 for(var i=0;i<dailysalePro.length;i++){
     sum=sum+dailysalePro[i].quantity

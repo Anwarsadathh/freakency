@@ -144,26 +144,11 @@ module.exports={
   
   cancelOrder: (orderId) => {
     return new Promise(async (resolve, reject) => {
-
       console.log(orderId,"opoooooo");
-
       let order = await db.get().collection(collection.ORDER_COLLECTION).findOne({_id:ObjectId(orderId)})
-
-
       console.log(order,"89898989");
-    //   if(order.paymentMethod != 'COD'){
-    //     // user.wallet = user.wallet +parseInt(order.totalAmount)
-    //     // console.log(user.wallet,'userwallet');
-    //   let wallet =  await db.get().collection(collection.USER_COLLECTION).updateOne({_id:ObjectId(order.userId)},
-    //     {
-    //         $set:{wallet:user.wallet}
-    //     })
-    // }
-
       db.get().collection(collection.ORDER_COLLECTION).updateOne({
         _id: ObjectId(orderId)
-
-
       },
         {
           $set: {
@@ -293,11 +278,8 @@ module.exports={
 //   /* -------------------------------------------------------------------------- */
 
   barchartData: () => {
-
     return new Promise(async (resolve, reject) => {
-
       let order = await db.get().collection(collection.ORDER_COLLECTION).aggregate([
-
         {
           $match: {
             "status": { $nin: ['Cancelled', 'pending'] }
@@ -318,8 +300,6 @@ module.exports={
     })
 
   },
-
-
 //   /* -------------------------------------------------------------------------- */
 //   /*                            line Charts of sales                            */
 //   /* -------------------------------------------------------------------------- */
@@ -328,16 +308,6 @@ module.exports={
     return new Promise(async (resolve, reject) => {
 
       let yearChart = await db.get().collection(collection.ORDER_COLLECTION).aggregate([
-        // {
-
-        //   $project: {
-
-        //     year: {
-        //       $year: '$date'
-        //     },
-        //     totalAmount: 1
-        //   }
-        // }, 
         {
           $group: {
             _id: "$year",
@@ -475,8 +445,7 @@ module.exports={
 
       ]).toArray()
       resolve(TotalUsers)
-      // console.log(",**************");
-      // console.log(TotalUsers);
+     
     })
   },
 
@@ -1064,16 +1033,7 @@ getDailySalespro: (day,dayend) => {
 //   total: { $sum: '$Price' }
 // }
 //          },
-        // {
-        //   $group: {
-        //     _id: '$item',
-        //     quantity: { $sum: '$quantity' },
-        //     totalAmount:{ $sum:'$Price' },
-        //     // name: { $first: '$product.name' },
-        //     date: { $first: '$date' },
-        //      //Price: { $first: '$product.price' },
-        //   }
-        // },
+   
         {
           $sort: { date: 1 },
         }
@@ -1083,125 +1043,5 @@ getDailySalespro: (day,dayend) => {
       console.log(dailysales,'dailysalwes');
     })
   },
-  // getDailySalespro: (day,dayend) => {
-  //   return new Promise(async (resolve, reject) => {
-
-  //     let dailysales = await db.get().collection(collection.ORDER_COLLECTION).aggregate([
-  //       {
-  //         $match: {
-  //           "status": { $nin: ['cancelled'] }
-  //         }
-  //       },
-  //       {
-  //         $unwind: '$products'
-  //       },
-  //       {
-  //         $project: {
-  //           totalAmount: 1,
-  //           date: 1,
-  //           status: 1,
-  //           _id: 1,
-  //           item: '$products.item',
-  //           quantity: '$products.quantity'
-
-  //         }
-  //       }, {
-  //         $lookup: {
-  //           from: collection.PRODUCT_COLLECTION,
-  //           localField: 'item',
-  //           foreignField: '_id',
-  //           as: 'product'
-  //         }
-  //       },
-  //       {
-  //         $project: {
-  //           date: { $dateToString: { format: "%Y-%m-%d", date: '$date' } }, totalAmount: 1, paymentMethod: 1, item: 1, product: { $arrayElemAt: ['$product', 0] }, quantity: 1
-  //         }
-  //       },
-  //       {
-  //         $match: { $and: [{ date: { $gte: day } }, { date: { $lte: dayend } }] }
-  //       },
-  //       {
-  //         $group: {
-  //           _id: '$item',
-  //           quantity: { $sum: '$quantity' },
-  //           totalAmount: { $sum: { $multiply: [{ $toInt: '$quantity' }, { $toInt: '$product.Price' }] } },
-  //           name: { $first: '$product.Name' },
-  //           date: { $first: '$date' },
-  //           price: { $first: '$product.Price' },
-  //         }
-  //       },
-  //       {
-  //         $sort: { date: 1 },
-  //       }
-  //     ]).toArray()
-  //     resolve(dailysales)
-  //     console.log(",akjs*****");
-  //     console.log(dailysales);
-  //   })
-  // },
-
-  // getDailySalespro: (day,dayend) => {
-  //   return new Promise(async (resolve, reject) => {
-
-  //     let dailysales = await db.get().collection(collection.ORDER_COLLECTION).aggregate([
-  //       {
-  //         $match: {
-  //           "status": { $nin: ['cancelled'] }
-  //         }
-  //       },
-  //       {
-  //         $unwind: '$products'
-  //       },
-  //       {
-  //         $project: {
-  //           totalAmount: 1,
-  //           date: 1,
-  //           status: 1,
-  //           _id: 1,
-  //           item: '$products.item',
-  //           quantity: '$products.quantity'
-
-  //         }
-  //       }, {
-  //         $lookup: {
-  //           from: collection.PRODUCT_COLLECTION,
-  //           localField: 'item',
-  //           foreignField: '_id',
-  //           as: 'product'
-  //         }
-  //       },
-  //       {
-  //         $project: {
-  //           date: { $dateToString: { format: "%Y-%m-%d", date: '$date' } }, totalAmount: 1,Name:1, paymentMethod: 1, item: 1, product: { $arrayElemAt: ['$product', 0] }, quantity: 1
-  //         }
-  //       },
-  //       {
-  //        // $match: { date:   {
-  //           //$gte: new Date(day).toISOString(),
-  //           //$lte: new Date(dayend).toISOString()
-  //           $match: { $and: [{ date: { $gte: day } }, { date: { $lte: dayend } }] }
-  //      // } }
-  //       },
-  //       {
-  //         $group: {
-  //           _id: '$item',
-  //           quantity: { $sum: '$quantity' },
-  //           totalAmount: { $sum: { $multiply: [{ $toInt: '$quantity' }, { $toInt: '$product.Price' }] } },
-  //           name: { $first: '$product.Name' },
-  //           date: { $first: '$date' },
-  //           price: { $first: '$product.Price' },
-  //         }
-  //       },
-  //       {
-  //         $sort: { date: 1 },
-  //       }
-  //     ]).toArray()
-  //     resolve(dailysales)
-  //     console.log(",akjs*****");
-  //     console.log(dailysales);
-  //     //test:$dateToString : { format: "%Y-%m-%d", date: day }
-  //     console.log('gfgkkkkk');
-  //   })
-  // },
+  
 }
