@@ -260,8 +260,8 @@ router.post('/checkout',async(req,res)=>{
              "payment_method": "paypal"
          },
          "redirect_urls": {
-             "return_url": "/order-success",
-             "cancel_url": "/"
+             "return_url": "http://localhost:3000/order-success",
+             "cancel_url": "http://localhost:3000"
          },
          "transactions": [{
              "amount": {
