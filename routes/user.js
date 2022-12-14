@@ -260,8 +260,8 @@ router.post('/checkout',async(req,res)=>{
              "payment_method": "paypal"
          },
          "redirect_urls": {
-             "return_url": "http://localhost:3000/order-success",
-             "cancel_url": "http://localhost:3000"
+             "return_url": "https://freakency.gq/order-success",
+             "cancel_url": "https://freakency.gq"
          },
          "transactions": [{
              "amount": {
